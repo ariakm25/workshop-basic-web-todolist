@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="form">
+      <h1 class="title">Buat Todo</h1>
+      <div class="card">
+        <form action="/create" method="post">
+          <label for="judul">Judul</label>
+          <input type="text" class="input" id="judul" name="judul" required>
+          <label for="deskripsi">deskripsi</label>
+          <textarea class="input" name="deskripsi" id="deskripsi" cols="30" rows="5" required></textarea>
+          <label for="deadline">deadline</label>
+          <input class="input" type="datetime-local" name="deadline" id="deadline" required>
+          <div class="submit">
+            <button type="submit" class="submitBtn">+ Buat Todo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="todos">
+      <h1 class="title">Todo</h1>
+      <% data.forEach(item => { %> 
+        <div class="card">
+          <h2 class="judul"><%- item.judul %></h2>
+          <p><%- item.deskripsi %></p>
+          <span><%- item.deadline.toLocaleString() %></span>
+          <div class="checkBtn">
+            <form action="/selesai/<%- item.id %>" method="post">
+              <button class="selesaiBtn" type="submit">Done</button>
+            </form>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+</body>
+</html>
